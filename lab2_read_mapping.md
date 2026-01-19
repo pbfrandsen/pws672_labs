@@ -4,7 +4,7 @@ In this lab we will be mapping resequencing reads to the reference genome. For t
 
 There are many short-read mappers to choose from and there are trade-offs to each. We will be using `minimap2`, one of the most commonly used all-purpose mappers.
 
-Before we start the lab, please copy all of your trimmed reads files to `~/groups/fslg_pws670/nobackup/autodelete/2_resequencing_mapping/trimmed_reads`. You will be mapping these back to the reference genome.
+Before we start the lab, please copy all of your trimmed reads files from the last lab to `~/groups/fslg_pws670/nobackup/autodelete/2_resequencing_mapping/trimmed_reads`. You will be mapping these back to the reference genome.
 
 ### 1. Install `minimap2` with `mamba`
 There is a `minimap2` package in [`bioconda`](https://anaconda.org/bioconda/minimap2). To install it, make sure you are in your `base` environment (your cursor should be prepended by `(base)`). If you don't see anything in `()` before your cursor, try:
