@@ -1,12 +1,12 @@
-#Lab 1: Trimming and QC of resequencing data
+# Lab 1: Trimming and QC of resequencing data
 
 In today's lab, we will be trimming raw Illumina reads from each individual and running some QC on them to evaluate how the sequencing went.
 
-###Trimming
+### Trimming
 
 Often, Illumina sequences come from the sequencing center with Illumina adapters still attached. Some sequencing centers remove those before delivering the data. Regardless, it doesn't hurt to run a trimming software just in case to remove the adapter sequence. There are many trimming utilities out there, but during this exercise, we will be using [`fastp`](https://github.com/OpenGene/fastp). `fastp` is an all-in-one trimming software. Take a look at their [GitHub page](https://github.com/OpenGene/fastp) to see all of the functions. It also outputs a `.json` file with a lot of information that can be useful to visualize later.
 
-####1. Install `fastp`
+#### 1. Install `fastp`
 We're going to use `conda` to install `fastp`. First, you'll want to create a new `conda` environment to house it (note, you can also use `mamba` for this process. Just substitute `conda` with `mamba` in the below commands. You're going to gain a lot of experience installing things in `conda` during this class and should get a hang of creating virtual environments and installing things. You can create a new `conda` environment with:
 
 ```$ conda create -n fastp```
@@ -26,7 +26,7 @@ Give it a try. If it works, you are ready for the next step. Note that if you wa
 You don't need to do that again because you have already installed it, but we will use the shortened version in the future
 
 
-####2. Run `fastp` on your sequence
+#### 2. Run `fastp` on your sequence
 
 Now, generate a fresh job script from the [BYU job script generator](https://rc.byu.edu/documentation/slurm/script-generator). Choose a single node, a single processor, and 4 GB per processor. A wall time of 2 hours should be plenty. You might want to add your email and alerts when the job begins, aborts, or finishes.
 
@@ -93,7 +93,7 @@ You can also check on the size of the trimmed files. Once they approach the size
 
 Once your job is complete. Check out the size of the resulting files. You should observe that the `trimmed.fastq.gz` files are much larger than the `unpaired.fastq.gz` files. If they aren't, that's your first clue that something went wrong. Why would that be? 
 
-####3. Install `MultiQC`
+#### 3. Install `MultiQC`
 
 Now we are going to run a program called `MultiQC` on the output files from the trimming jobs. [`MultiQC`](https://multiqc.info/) is a powerful piece of software that allows you to visualize the quality of multiple samples in one place.
 
@@ -109,7 +109,7 @@ Once it is installed, you'll need to activate it with:
 
 `$ conda activate multiqc`
 
-####4. Copy the `json` files into your own directory and run `MultiQC`
+#### 4. Copy the `json` files into your own directory and run `MultiQC`
 
 Once you are finished trimming, copy your output `json` files to the group `trimmed_jsons` directory (`~/groups/fslg_pws670/l_tetonica_raw/pop_data/trimmed_jsons`). `MultiQC` only needs to be run once, but I would like to get you all practice so I'm going to have you copy the contents of that directory (wait until everyone's trimming job is complete!) to your own `autodelete` directory. You can do this with a recursive copy.
 
