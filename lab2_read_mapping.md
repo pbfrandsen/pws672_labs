@@ -1,6 +1,6 @@
 # Lab 2: Mapping resequencing data
 
-In this lab we will be mapping resequencing reads to the reference genome. For this exercise, each student will use the same assignments from the last lab to map reads to the reference genome (each student should have access to four samples).
+In this lab we will be mapping resequencing reads to the reference genome. For this exercise, each student will use the same assignments from the last lab to map reads to the reference genome (each student should map four samples).
 
 There are many short-read mappers to choose from and there are trade-offs to each. We will be using `minimap2`, one of the most commonly used all-purpose mappers.
 
