@@ -41,7 +41,7 @@ When it is complete, check out the new files that are listed in the directory wh
 
 For each individual sequencing run, you will need to map the reads separately.
 
-Work with your team to choose who maps which set of reads to the genome. You only need to map each set of reads to each genome once.
+Work with your team to choose who maps which set of reads to the genome. You only need to map each set of reads to the genome once.
 
 Change directories into `~/groups/fslg_pws670/nobackup/autodelete/2_resequencing_mapping/job_files`
 
@@ -51,7 +51,7 @@ Paste the embedded `SLURM` directives into a new job file. Make sure you load bo
 
 ```
 source ~/.bashrc
-conda activate minimap2
+mamba activate minimap2
 module load samtools
 ```
 
