@@ -1,0 +1,161 @@
+# Lab 3: `ANGSD` for population-level stats
+
+However, first, we need to look at the results from last week's lab:
+#### Calculate read mapping stats
+	$ module load samtools
+	$ samtools flagstat <bamfile>
+Add your mapping stats to the [Google Sheet][1].
+
+
+#### Index bam file
+	$ module load samtools
+	$ samtools index <bamfile>
+
+#### Calculate coverage from bam
+	$ source ~/.bashrc
+	$ mamba create -n blobtools -c conda-forge -c bioconda blobtools
+	$ mamba activate blobtools
+	$ blobtools map2cov -i <path_to_reference_genome> -b <path_to_bamfile>
+
+Chromosome length scaffolds are `LtChr[1-10]`
+
+Add your coverage stats to the [Google Sheet][2].
+
+For lab 2, you will submit the read mapping stats and coverage estimates for each chromosome to Learning Suite. What do you notice? Why might that be?
+
+## Estimate population-level stats for the Utah and Arizona populations
+
+#### Prepare input files
+You will each be doing this individually. First generate a new directory in your `~/nobackup/autodelete` directory called something like `pws672_lab3`. Copy the reference genome to your `~/nobackup/autodelete/pws672_lab3` directory (the path to the reference genome is: `/nobackup/archive/grp/fslg_pws670/Final_Ltet_genome_files/Ltet_assembly.fasta`)
+
+
+I would like each of you to choose a different comparison to make between the four populations of stoneflies, i.e., `CV` vs `SG`, `CV` vs `WC`, `CV` vs `DB`, `SG` vs `WC`, `SG` vs. `DB`, `WC` vs `DB`. Once your choice is established, create two lists, one with the paths to the bam files for the first population and one with the paths to the bam files for the second population.
+
+Next, we'll estimate some population level statistics, treating these two populations as distinct.
+
+**Hint:** A good way to send the path of a filename to a file is, e.g.: `ls <path_to_file> >> CV_list.txt`
+
+Once you have created your list files, double check that each list file includes six paths.
+
+#### Index the reference genome file
+	$ module load samtools
+	$ samtools faidx <reference_genome>
+
+#### Install `ANGSD` with `bioconda`
+	$ mamba create -n angsd -c conda-forge -c bioconda angsd python=3.10
+
+#### Generate SFS for both populations
+In this step, we'll be estimating the site frequency spectrum or "SFS".
+
+First, I'm going to each you a handy way to add arguments to your `sbatch` job files. An argument is something that you feed to a command. For, example, in the command:
+	$ sbatch this_thing.job hello
+
+`hello` would be an argument. If you want to make a single job file for multiple runs on different data, a good way to avoid extra work is to use arguments. When you are a running a unix script, you can do this by placing a `$1` or a `$2` (or `$3` and so on--the number simply refers to the number of argument that you supply) into the script and then supplying those arguments after the script.
+
+Let's try this. Make a new script called `argument_tester.sh`. Inside write the following:
+
+	echo Hi, my name is $1. I like to play $2. I was born in $3.
+
+Save the file and then run it with, e.g.:
+	`$ sh argument_tester.sh Darwin science 1809`
+
+What do you see? Try a few different arguments. You can use this same method to run the same software on multiple different datasets with different output names. Create a new job script from the [BYU job script generator][3]. Choose 18 threads, 4 GB per thread, and 10 hours. You probably want to email yourself. Make a new job file, called, e.g. `angsd.job`.
+
+Now, we'll estimate the site allele frequency likelihood for each population. However you only need to create one job script because we will use arguments.
+
+The command to estimate the site allele frequency likelihood is:
+
+```
+source ~/.bashrc
+mamba activate angsd
+angsd -b $1 -anc Ltet_assembly.fasta -out $2 -doSaf 1 -GL 1 -nThreads $SLURM_NPROCS
+```
+
+Where `$1` is referring to the name of the list (whether it be the list for the `CV` population or the list for `WC` population, etc.) and `$2` is referring to the output. Then you can run the job with, e.g.:
+
+`$ sbatch angsd.job CV_list.txt CV_sfs`
+
+After those jobs are complete (they will take \~2-3 hours), make a new job file, e.g., `angsd_sfs.job`, again with 18 threads and 4 GB of RAM per thread. We will obtain the maximum likelihood of the folded SFS for each population. Unfortunately, the version of `realSFS` that is bundled with the most recent version of `ANGSD` does not work. Therefore, we have to install an older version in a new `mamba` environment (annoying, I know, but this kind of thing is 90% of bioinformatics!).
+
+```
+$ mamba deactivate
+$ mamba create -n angsd_921 -c conda-forge -c bioconda angsd=0.921
+```
+
+Now, in your job file, you can paste in the following commands:
+
+```
+source ~/.bashrc
+mamba activate angsd_921
+realSFS $1 -fold 1 -P $SLURM_NPROCS > $2
+```
+
+Where the first argument is the `saf.idx` file from whatever sample you are running and the second argument is the outfile. Here is an example of what I would do if my CV file was called `cv_sfs.saf.idx` and I wanted my output `sfs` to be called `cv.sfs`:
+
+```
+$ sbatch angsd_sfs.job cv_sfs.saf.idx cv.sfs
+```
+
+Don't forget to run it for both populations. Before moving to the next step, you'll want to make sure that you have a non empty `cv.sfs` file (or whatever your population may be).
+
+#### Estimate thetas
+
+Now, we'll count the thetas for each site. You'll do this with the following, again pasted to the bottom of a new job file called, e.g., `angsd_thetas.job`:
+
+```
+source ~/.bashrc
+mamba activate angsd_921
+realSFS saf2theta $1 -sfs $2 -outname $3 -P $SLURM_NPROCS
+```
+
+Again, if I were running this for the `CV` population, I would do something like:
+
+```
+$ sbatch angsd_thetas.job cv_sfs.saf.idx cv.sfs cv
+```
+
+Don't forget to run it for both populations. The result will be non-empty files that end in `thetas.gz` and `thetas.idx`.
+
+Ok, now, you're ready to estimate Tajima's D and other stats. You'll make yet another job file called, e.g., `angsd_theta_stats.job` and this time use the following command:
+
+```
+source ~/.basrc
+mamba activate angsd_921
+thetaStat do_stat $1 -win 50000 -step 10000 -outnames $2
+```
+
+Where the first argument is the `thetas.idx` file from the previous step and the second argument is the prefix for the outfile. Here is an example of how you could submit that job for the `CV` population.
+
+```
+$ sbatch angsd_theta_stats.job cv.thetas.idx cv.thetas
+```
+
+This will output a new file that ends in `pestPG` that will have a variety of stats, including Tajima's D, across a sliding window that we can plot next week.
+
+### Estimate Fst between populations
+
+First, we need to estimate a 2 dimensional site frequency spectrum using both pops. Again, you need to make a new job file called, e.g. `angsd_2d_sfs.job`. This time, however, we'll need more RAM. You should request 8 GB of RAM per thread and, like the last job, 18 threads.
+
+Here is the command, using the `.saf.idx` files from above for the `CV` and `WC` populations. Remember, you should substitute the appropriate `.idx` files for whatever population comparison you are in charge of.
+
+```
+source ~/.bashrc
+mamba activate angsd_921
+realSFS cv_sfs.saf.idx wc_sfs.saf.idx -P $SLURM_NPROCS >cv.wc.ml
+```
+
+Now, you should have a non-empty file that represents a 2D SFS called, e.g., `cv.wc.ml`. We're going to use that 2D SFS to estimate Fst and do a sliding window analysis. Create a new job file called, e.g., `angsd_fst.job` with the following commands, using the 2d sfs from above (note, you'll have to modify the `cv` or `wc` below depending on the population comparison you are assigned)
+
+```
+source ~/.bashrc
+mamba activate angsd_921
+realSFS fst index cv_sfs.saf.idx wc_sfs.saf.idx -sfs cv.wc.ml -fstout cv.wc -P $SLURM_NPROCS
+realSFS fst stats cv.wc.fst.idx > global_fst.txt
+realSFS fst stats2 cv.wc.fst.idx -win 50000 -step 10000 > window.fst.txt
+```
+
+You will now have a file, `window.fst.txt` that includes the Fst value for each window in your analysis. What do you notice about the numbers?
+
+[1]:	https://docs.google.com/spreadsheets/d/1JyHKOnVlw0TYR7mXHR-6ysyHzA9T5o_CtK0IvhFcrqQ/edit?usp=sharing
+[2]:	https://docs.google.com/spreadsheets/d/1JyHKOnVlw0TYR7mXHR-6ysyHzA9T5o_CtK0IvhFcrqQ/edit?usp=sharing
+[3]:	https://rc.byu.edu/documentation/slurm/script-generator
