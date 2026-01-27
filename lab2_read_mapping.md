@@ -1,10 +1,10 @@
 # Lab 2: Mapping resequencing data
 
-In this lab we will be mapping resequencing reads to the reference genome. For this exercise, each student will use the same assignments from the last lab to map reads to the reference genome (each student should have access to four samples).
+In this lab we will be mapping resequencing reads to the reference genome. For this exercise, each student will use the same assignments from the last lab to map reads to the reference genome (each student should map four samples).
 
 There are many short-read mappers to choose from and there are trade-offs to each. We will be using `minimap2`, one of the most commonly used all-purpose mappers.
 
-Before we start the lab, please copy all of your trimmed reads files to `~/groups/fslg_pws670/nobackup/autodelete/2_resequencing_mapping/trimmed_reads`. You will be mapping these back to the reference genome.
+Before we start the lab, please copy all of your trimmed reads files from the last lab to `~/groups/fslg_pws670/nobackup/autodelete/2_resequencing_mapping/trimmed_reads`. You will be mapping these back to the reference genome.
 
 ### 1. Install `minimap2` with `mamba`
 There is a `minimap2` package in [`bioconda`](https://anaconda.org/bioconda/minimap2). To install it, make sure you are in your `base` environment (your cursor should be prepended by `(base)`). If you don't see anything in `()` before your cursor, try:
@@ -41,7 +41,7 @@ When it is complete, check out the new files that are listed in the directory wh
 
 For each individual sequencing run, you will need to map the reads separately.
 
-Work with your team to choose who maps which set of reads to the genome. You only need to map each set of reads to each genome once.
+Work with your team to choose who maps which set of reads to the genome. You only need to map each set of reads to the genome once.
 
 Change directories into `~/groups/fslg_pws670/nobackup/autodelete/2_resequencing_mapping/job_files`
 
@@ -51,7 +51,7 @@ Paste the embedded `SLURM` directives into a new job file. Make sure you load bo
 
 ```
 source ~/.bashrc
-conda activate minimap2
+mamba activate minimap2
 module load samtools
 ```
 
