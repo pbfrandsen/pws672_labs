@@ -1,6 +1,6 @@
 # Lab 4: Population structure: PCA, ADMIXTURE
 
-###Before we get started into the population structure analyses, let's look at the results from last week.
+### Before we get started into the population structure analyses, let's look at the results from last week.
 
 First, install `R`  and activate it using `conda`:
 
