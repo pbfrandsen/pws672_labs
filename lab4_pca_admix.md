@@ -1,4 +1,4 @@
-#Lab 4: Population structure: PCA, ADMIXTURE
+# Lab 4: Population structure: PCA, ADMIXTURE
 
 ###Before we get started into the population structure analyses, let's look at the results from last week.
 
@@ -29,7 +29,7 @@ Since this will take a little while, it might make sense to open an additional `
 
 This will allow you to run the R scripts on the supcomputer. Alternatively, you can simply download the R scripts and the output data files and run it within, e.g. [Rstudio](https://www.rstudio.com/).
 
-###Combine Tajima's D estimates from your two populations into single file
+### Combine Tajima's D estimates from your two populations into single file
 
 You can check out the format of the theta estimate files with, e.g. (use whatever population code you used for your samples):
 ```
@@ -63,7 +63,7 @@ CV      WC
 0.094888        0.294139
 ```
 
-###Create a new file with the `Fst` values
+### Create a new file with the `Fst` values
 
 You can also check out the results of your sliding window Fst analysis with:
 
@@ -93,7 +93,7 @@ Fst
 0.135191
 ```
 
-###Create plots for Tajima's D and `Fst`
+### Create plots for Tajima's D and `Fst`
 
 Copy `tajimas_d_plot.r` and `fst_plots.r` from the `~/groups/fslg_pws670/nobackup/archive/pws672_w2026/3_angsd_pop_stats` to your current directory.
 
@@ -117,7 +117,7 @@ After you run this script, you should have two new files, `Fst_window.pdf` and `
 
 What do you notice about Tajima's D? How about the `Fst` values? Turn these in and interpret them for your computational lab assignment this week on Learning Suite. Use full sentences in your interpretation and ensure it is accurate. If you want to add some conjecture, make sure you qualify it as such.
 
-###1. Install more `ANGSD` dependencies
+### 1. Install more `ANGSD` dependencies
 
 ```
 $ mamba activate angsd
@@ -125,7 +125,7 @@ $ mamba install cython scipy pandas gxx
 $ mamba deactivate
 ```
 
-###2. Generate genotype likelihoods with `ANGSD`
+### 2. Generate genotype likelihoods with `ANGSD`
 
 Create a new directory in your `~/nobackup/autodelete` directory called `lab4_angsd_pca`. Navigate into that directory.
 
@@ -157,7 +157,7 @@ angsd -GL 1 -out PCA -nThreads $SLURM_NPROCS \
 
 Go ahead and submit that job. It may take a couple of hours to complete. In the meantime, you can begin the next steps. For any step below that relies on the `PCA_beagle.gz` file, you'll need to wait until the job you just submitted is complete.
 
-###3. Generate a covariance matrix using `PCAngsd`
+### 3. Generate a covariance matrix using `PCAngsd`
 
 First install `PCAngsd`:
 
@@ -181,7 +181,7 @@ python pcangsd-v.0.99/pcangsd.py -beagle PCA.beagle.gz -o lednia_PCA \
 
 Go ahead and submit that job.
 
-###4. Run Admixture analysis with `NGSAdmix`
+### 4. Run Admixture analysis with `NGSAdmix`
 
 `NGSAdmix` is now part of the `ANGSD` package and can perform admixture analysis using the beagle file of genotype likelihoods that you generated in step 2. Create a job file called, e.g., `angsd_admix.job` with the following commands. The parameter that you need to think about here is `K`, which as you learned in the lecture is the number of ancestral populations. We have four different localities, but aren't sure how many different ancestries (nearby populations may have substantial ongoing gene flow. We will start by setting `K` to 2.
 
