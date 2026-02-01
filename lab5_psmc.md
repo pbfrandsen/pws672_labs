@@ -87,9 +87,9 @@ You'll only need to run those commands once, but make sure that `mamba` is activ
 
 To generate the plot, we'll use a mutation rate of `2.8e-09`. This is the published mutation rate for _Drosophila melanogaster_. Since I couldn't find any published mutation rates for stoneflies, we can start there. However, bumblebees have a higher mutation rate of `3.9e-09`. We could try both of those and see how it impacts the PSMC plot. We will use a generation length of 1 year. Substitute <sample> with your sample number.
 
-   **module to load**: `module load gnuplot`
-   **module to load**: `module load psmc`
-   **command**: ```psmc_plot.pl -p -u 2.8e-09 -g 1 <sample>_psmc <sample>.psmc```
+   + **module to load**: `module load gnuplot`
+   + **module to load**: `module load psmc`
+   + **command**: ```psmc_plot.pl -p -u 2.8e-09 -g 1 <sample>_psmc <sample>.psmc```
 
 The result should be a PDF file called <sample>_psmc.pdf.
 
