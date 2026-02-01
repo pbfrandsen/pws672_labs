@@ -175,8 +175,7 @@ Once `PCAngsd` is installed and your job from step 2 is complete, you can set up
 ```
 source ~/.bashrc
 mamba activate angsd
-python pcangsd-v.0.99/pcangsd.py -beagle PCA.beagle.gz -o lednia_PCA \
-    -threads $SLURM_NPROCS
+python pcangsd-v.0.99/pcangsd.py -beagle PCA.beagle.gz -o lednia_PCA -threads $SLURM_NPROCS
 ```
 
 Go ahead and submit that job.
