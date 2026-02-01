@@ -96,7 +96,7 @@ The result should be a PDF file called `<sample>_psmc.pdf`.
 ### 3. Copy your `PSMC` to the lab directory and run `pcmc_plot.pl` on your other samples.
 * Now copy your `.psmc` file (clearly named with your sample number) to `~/groups/fslg_pws670/nobackup/archive/pws672_w2026/5_psmc`. Once everyone has copied their files over, re-run the plot incoporating all of the different lines. If your plot looks weird, think about adjusting the axis with the `-Y` parameter. Often if there is noise, you will have a large increase in Ne, which is just due to noise (or due to misspecification of parameters).
 
-See appendix II in the [psmc documentation](https://github.com/lh3/psmc) for more information. 
+See appendix II in the [psmc documentation](https://github.com/lh3/psmc), which shows how to run the plot on multiple samples at once. 
 
 
 ### Key takeaways for the lab write-up
