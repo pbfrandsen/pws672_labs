@@ -1,6 +1,6 @@
 # Lab 6: Orthology prediction with compleasm
 
-During this lab, we will be using [compleasm](https://github.com/huangnengCSU/compleasm?tab=readme-ov-file) to predict single copy orthologs across published whole genome sequences related to _Lednia tetonica_. `compleasm` is a reimplementation of `busco` that has been [shown to be faster and more accurate](https://doi.org/10.1093/bioinformatics/btad595). Each of you will be assessing a genome that you downloaded last week. The assignments are [here](https://docs.google.com/spreadsheets/d/1EYtn8MeYCQZgfnbWpq5FS9S503dLrMSZd_h6t1BtlUE/edit?usp=sharing) under the "phylogenomics_assignments" tab.
+During this lab, we will be using [compleasm](https://github.com/huangnengCSU/compleasm?tab=readme-ov-file) to predict single copy orthologs across published whole genome sequences related to _Lednia tetonica_. `compleasm` is a reimplementation of `busco` that has been [shown to be faster and more accurate](https://doi.org/10.1093/bioinformatics/btad595). Each of you will be assessing a genome that you downloaded last week. The assignments are [here](https://docs.google.com/spreadsheets/d/1JyHKOnVlw0TYR7mXHR-6ysyHzA9T5o_CtK0IvhFcrqQ/edit?usp=sharing) under the "phylogenomics_assignments" tab.
 
 #### Create a new `mamba` environment for `compleasm`
 
@@ -60,4 +60,4 @@ cp gene_marker.fasta ~/groups/fslg_pws670/nobackup/archive/pws672_w2026/7_alignm
 ```
 
 
-In the next lab, we will look at the output of the `compleasm` results and then use them to start generating a phylogeny. Before that, take a look at the output files in our output file. How complete do these genomes look in terms of single copy orthologs? Add your results to the [spreadsheet](https://docs.google.com/spreadsheets/d/1EYtn8MeYCQZgfnbWpq5FS9S503dLrMSZd_h6t1BtlUE/edit?usp=sharing). Given these results, is there anything we should consider changing before moving forward with our phylogenomics work?
+In the next lab, we will look at the output of the `compleasm` results and then use them to start generating a phylogeny. Before that, take a look at the output files in our output file. How complete do these genomes look in terms of single copy orthologs? Add your results to the [spreadsheet](https://docs.google.com/spreadsheets/d/1JyHKOnVlw0TYR7mXHR-6ysyHzA9T5o_CtK0IvhFcrqQ/edit?usp=sharing). Given these results, is there anything we should consider changing before moving forward with our phylogenomics work?
