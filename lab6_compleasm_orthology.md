@@ -51,12 +51,13 @@ Now that you have that in place, go ahead and submit your job.
 batch compleasm.job
 ```
 
-Once your `compleasm` run is complete, change directories to your `<species_name>_compleasm/insecta_odb12` directory. In there, you should see a file called `gene_marker.fasta`. Go ahead and copy that file (while also renaming it with your species name) into our class directory so that we can make the ortholog files.
+Once your `compleasm` run is complete, change directories to your `<species_name>_compleasm/insecta_odb12` directory. In there, you should see a file called `gene_marker.fasta`. Go ahead and copy that file into our class directory (while also renaming it with your species name--this is important, because we will want to use the species name in a downstream step).
 
-For example, if I was copying over the file for _Lednia tetonica_, I would use the command:
+For example, if I was copying over the file for _Lednia tetonica_, I would use the following command. Just remember to change the species name to whatever species you are working with:
 
 ```
 cp gene_marker.fasta ~/groups/fslg_pws670/nobackup/archive/pws672_w2026/7_alignment_models/lednia_tetonica.fasta
 ```
 
-In the next lab, we will look at the output of the `compleasm` results and then use them to start generating a phylogeny. Before that, take a look at the output files in our output file. How complete do these genomes look in terms of single copy orthologs? Given these results, is there anything we should consider changing before moving forward with our phylogenomics work?
+
+In the next lab, we will look at the output of the `compleasm` results and then use them to start generating a phylogeny. Before that, take a look at the output files in our output file. How complete do these genomes look in terms of single copy orthologs? Add your results to the [spreadsheet](https://docs.google.com/spreadsheets/d/1EYtn8MeYCQZgfnbWpq5FS9S503dLrMSZd_h6t1BtlUE/edit?usp=sharing). Given these results, is there anything we should consider changing before moving forward with our phylogenomics work?
