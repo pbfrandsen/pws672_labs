@@ -23,7 +23,7 @@ Now copy the genome(s) that you were assigned to from the directory where you do
 Now copy the `mb_downloads` folder from `~/groups/fslg_pws670/nobackup/archive/pws672_w2026/6_compleasm` into your same directory. This is important because it contains all of the gene models for the single-copy orthologs that we are searching for.
 
 ```
-cp -r ~/groups/fslg_pws670/nobackup/archive/pws672_w2026/6_compleasm .
+cp -r ~/groups/fslg_pws670/nobackup/archive/pws672_w2026/6_compleasm/mb_downloads .
 ```
 
 #### Create and submit your job
@@ -42,13 +42,21 @@ mamba activate compleasm
 Now, add the command for `compleasm`. Here is an example commmand, you can modify the input and output to your particular genome.
 
 ```
-compleasm run -a <genome.fasta> -o <genome_name>_compleasm -l eudicots -t $SLURM_NPROCS
+compleasm run -a <genome.fasta> -o <genome_name>_compleasm -l insecta -t $SLURM_NPROCS
 ```
 
 Now that you have that in place, go ahead and submit your job.
 
 ```
 batch compleasm.job
+```
+
+Once your `compleasm` run is complete, change directories to your `<species_name>_compleasm/insecta_odb12` directory. In there, you should see a file called `gene_marker.fasta`. Go ahead and copy that file (while also renaming it with your species name) into our class directory so that we can make the ortholog files.
+
+For example, if I was copying over the file for _Lednia tetonica_, I would use the command:
+
+```
+cp gene_marker.fasta ~/groups/fslg_pws670/nobackup/archive/pws672_w2026/7_alignment_models/lednia_tetonica.fasta
 ```
 
 In the next lab, we will look at the output of the `compleasm` results and then use them to start generating a phylogeny. Before that, take a look at the output files in our output file. How complete do these genomes look in terms of single copy orthologs? Given these results, is there anything we should consider changing before moving forward with our phylogenomics work?
