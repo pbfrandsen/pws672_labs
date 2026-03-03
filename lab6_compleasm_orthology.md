@@ -1,4 +1,4 @@
-#Lab 6: Orthology prediction with compleasm
+# Lab 6: Orthology prediction with compleasm
 
 During this lab, we will be using [compleasm](https://github.com/huangnengCSU/compleasm?tab=readme-ov-file) to predict single copy orthologs across published whole genome sequences related to _Lednia tetonica_. `compleasm` is a reimplementation of `busco` that has been [shown to be faster and more accurate](https://doi.org/10.1093/bioinformatics/btad595). Each of you will be assessing a genome that you downloaded last week. The assignments are [here](https://docs.google.com/spreadsheets/d/1EYtn8MeYCQZgfnbWpq5FS9S503dLrMSZd_h6t1BtlUE/edit?usp=sharing) under the "phylogenomics_assignments" tab.
 
