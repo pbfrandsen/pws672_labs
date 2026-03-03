@@ -48,7 +48,7 @@ compleasm run -a <genome.fasta> -o <genome_name>_compleasm -l insecta -t $SLURM_
 Now that you have that in place, go ahead and submit your job.
 
 ```
-batch compleasm.job
+sbatch compleasm.job
 ```
 
 Once your `compleasm` run is complete, change directories to your `<species_name>_compleasm/insecta_odb12` directory. In there, you should see a file called `gene_marker.fasta`. Go ahead and copy that file into our class directory (while also renaming it with your species name--this is important, because we will want to use the species name in a downstream step).
