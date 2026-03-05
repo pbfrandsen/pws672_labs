@@ -75,7 +75,7 @@ Here is some example text that you'll want to put in your array file (you could 
 #SBATCH --array=1-35
 
 source ~/.bashrc
-conda activate mafft
+mamba activate mafft
 
 #parses locus_names.txt for array 
 locus=$(head -n $SLURM_ARRAY_TASK_ID locus_names.txt | tail -n1)
