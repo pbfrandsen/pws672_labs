@@ -223,7 +223,7 @@ Copy that into a new job file called `iqtree_model_selection.job`. Then at the b
 ```
 iqtree-2.1.3-Linux/bin/iqtree2 -s FcC_smatrix.fas \
 -spp partition_def.txt -nt $SLURM_NPROCS -safe \
--pre penstemon_partition -m TESTMERGEONLY -mset LG+G
+-pre lednia_partition -m TESTMERGEONLY -mset LG+G
 ```
 
 This will select an appropriate partition scheme. In the next lab, we will start tree searches which will be combined with further model selection on the newly chosen partitioning scheme.
