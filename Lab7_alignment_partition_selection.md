@@ -8,7 +8,7 @@ The output from the `compleasm` lab are here:
 ~/groups/fslg_pws670/nobackup/archive/pws672_w2026/7_alignment_models
 ```
 
-###2. Create new unaligned `FASTA` files for each single copy ortholog
+### 2. Create new unaligned `FASTA` files for each single copy ortholog
 
 **Note**: I will be doing this step with you during class. Please do not do this step yourselves as it will overwrite what I am doing. However, I will outline it here so you know how to do it for future datasets.
 
@@ -24,7 +24,7 @@ sed -i -e 's/.fasta//g' *fas
 
 Now look at a couple of alignments and make sure they look like you expect. They should have a `FASTA` header that is simply a species name, followed by amino acid sequences.
 
-###3. Copy unaligned alignments into your own directory
+### 3. Copy unaligned alignments into your own directory
 Now, you will all be working independently. First you should make a new directory in your `nobackup/autodelete` directory. Perhaps call it `lab7/unaligned_aa`
 
 ```
@@ -37,7 +37,7 @@ Copy the unaligned `FASTA` files into your new directory. Before you enter this 
 $ cp *fas ~/nobackup/autodelete/lab7/unaligned_aa
 ```
 
-###4. Align the single copy orthologs
+### 4. Align the single copy orthologs
 
 First, you'll need to create a new `mamba` environment that has `mafft` installed.
 
@@ -152,7 +152,7 @@ perl ALICUT_V2.31.pl
 
 It will request some information. We are using amino acid data so we don't have to worry about the nucleotide specific parameters. Instead, you can simply press `s` and it will start the process and automatically cut out the regions of the alignment that are indistinguishable from random noise. The newly cut alignments will start with the prefix `ALICUT`.
 
-###6. Concatenate your alignment and create partition definition file
+### 6. Concatenate your alignment and create partition definition file
 
 Make a new directory in your `lab7` directory called `alicut_aa`
 
@@ -188,7 +188,7 @@ python extract_partition_file_from_fcc.py FcC_info.xls
 
 You will now have a new file in that directory called `partition_def.txt`.
 
-###7. Start partition search using `IQ-TREE`
+### 7. Start partition search using `IQ-TREE`
 
 Create another new directory in your `lab7` directory called `iqtree` and navigate into it.
 
