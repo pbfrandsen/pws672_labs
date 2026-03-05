@@ -91,7 +91,7 @@ sbatch mafft_array.job
 
 When the job is complete, you should have many new files that end in `_aligned.fas`. Make sure that you don't go to the next step until all of the alignments are complete (you can check the job with `squeue -u <username>`. Once they are complete, look at a few of the files. How are the `_aligned.fas` files different than their unaligned counterparts? What do you notice?
 
-###5. Run `Aliscore` and `ALICUT` on your aligned sequences
+### 5. Run `Aliscore` and `ALICUT` on your aligned sequences
 
 Make a new directory in your `lab7` directory called `aligned_aa`. If you are still in your `unaligned_aa` directory, you would do this with:
 
