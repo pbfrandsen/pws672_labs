@@ -1,10 +1,10 @@
-#Lab 8 tree estimation
+# Lab 8 tree estimation
 
 In this lab, we're going to generate both a tree from the concatenated supermatrix and a species tree from multiple gene trees. 
 
 We're going to estimate a maximum likelihood tree using the partitioning scheme that we estimated in Lab 7. We're also going to select the best substitution model for each subset in the partitioning scheme using `ModelFinder`, which is a piece of software implemented into `IQ-Tree`. 
 
-####1. Estimate tree from concatenated supermatrix
+#### 1. Estimate tree from concatenated supermatrix
 First, you're going to navigate back to your `iqtree` directory from lab 7. If you used the command given in `lab7`, you should have a new file there called `lednia_partition.best_scheme.nex`. This contains the information for your partitioning scheme. We are now going to select protein models for each of the new subsets selected during partition finding using `ModelFinder` and then estimate a tree using that fixed model. We will also generate 1000 ultrafast bootstrap replicates to estimate node support. Generate a new job file with the [research computing job script generator](https://rc.byu.edu/documentation/slurm/script-generator). Select 4 GB of RAM per processor, 18 processor cores, and 72 hours of wall time. Make a new job file called `iqtree_supermatrix.job`. Paste in the information from the job script generator and then add the following command. Make sure that the `iqtree-2.1.3-Linux` folder is still in your current directory.
 
 ```
@@ -13,9 +13,9 @@ iqtree-2.1.3-Linux/bin/iqtree2 -s FcC_smatrix.fas \
 -pre lednia_concatenated -m MFP -bb 1000 -bnni
 ```
 
-Go ahead and submit the job. When it is complete, you will have a new treefile called `penstemon_concatenated.treefile`. This is the result of your supermatrix analysis. We will compare this tree to the `ASTRAL` species tree at the end of the lab.
+Go ahead and submit the job. When it is complete, you will have a new treefile called `lednia_concatenated.treefile`. This is the result of your supermatrix analysis. We will compare this tree to the `ASTRAL` species tree at the end of the lab.
 
-####2. Estimate individual locus trees
+#### 2. Estimate individual locus trees
 
 Navigate to your `alicut_aa` directory. In this directory, you will have all of your cut alignments. We're going to use a job array to generate an individual gene tree for each locus.
 
@@ -58,7 +58,7 @@ iqtree-2.1.3-Linux/bin/iqtree2 -s $align -m MFP -bb 1000 \
 -pre `basename $align _aligned.fas`
 ```
 
-####3. Estimate species tree using `ASTRAL`.
+#### 3. Estimate species tree using `ASTRAL`.
 
 First, we need to install a new `mamba` environment for the software we are using. `ASTRAL` is now included in the [`ASTER`](https://github.com/chaoszhang/ASTER?tab=readme-ov-file) suite. Go ahead and create a new environment with ASTER installed:
 
@@ -68,7 +68,7 @@ mamba create -n aster -c bioconda aster
 
 Navigate to the directory that holds your gene trees.
 
-Now concatenate all of the gene trees into a single input file.
+Now, concatenate all of the gene trees into a single input file.
 
 ```
 cat *treefile > all.tre
